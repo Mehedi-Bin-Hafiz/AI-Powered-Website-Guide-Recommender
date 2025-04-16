@@ -1,6 +1,9 @@
 # **Web Scraping and Query Matching Chatbot**
 
-![img](./docs/architecture.png "*Architecture*") 
+<figure>
+  <img src="./docs/architecture.png" alt="Design architecture">
+  <figcaption>System Architecture Diagram</figcaption>
+</figure>
 
 This document describes a project that implements a chatbot capable of scraping website data, embedding the scraped text into a vector database, and using the stored embeddings to find the most relevant link based on user queries.
 ## **Overview**
