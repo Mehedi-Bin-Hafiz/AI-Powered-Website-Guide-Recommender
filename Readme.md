@@ -1,7 +1,8 @@
 # **Web Scraping and Query Matching Chatbot**
 
+![img](./docs/architecture.png) *Architecture*
+
 This document describes a project that implements a chatbot capable of scraping website data, embedding the scraped text into a vector database, and using the stored embeddings to find the most relevant link based on user queries.
-![img](./docs/architecture.png)
 ## **Overview**
 
 The project combines the following technologies and methodologies:
