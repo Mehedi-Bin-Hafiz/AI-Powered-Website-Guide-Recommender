@@ -1,75 +1,221 @@
-# **Web Scraping and Query Matching Chatbot**
+# AI-Powered Website Guide Recommender
 
 <p align="center">
-  <img src="./docs/architecture.png" alt="Design architecture">
+  <img src="./docs/architecture.png" alt="System Architecture" width="600">
   <br>
-  <strong>System Architecture Diagram</strong>
-  <br>
+  <em>System Architecture Overview</em>
 </p>
 
-This document describes a project that implements a chatbot capable of scraping website data, embedding the scraped text into a vector database, and using the stored embeddings to find the most relevant link based on user queries.
-## **Overview**
+## 🔍 Overview
 
-The project combines the following technologies and methodologies:
-1. Web scraping for extracting text and links from a specified website.
-2. Vector database (ChromaDB) to store and query embeddings of the scraped text.
-3. Sentence-Transformers to generate embeddings for text and user queries.
-4. A chatbot interface for querying the data and retrieving the most relevant link.
+An intelligent chatbot that scrapes websites, creates semantic embeddings of content, and provides users with the most relevant links based on their natural language queries. This tool eliminates the need to manually browse through websites by understanding user intent and returning precise, contextually relevant links.
 
-## **Key Features**
-- **Daily scraping of website data.**
-- **Embedding text using a pre-trained Sentence-Transformers model.**
-- **Querying embeddings for relevance matching.**
-- **User-friendly chatbot interface.**
-- **Saves users time by providing the exact link they want.**
+## ✨ Key Features
 
-## **Project Workflow**
+- **🕷️ Smart Web Scraping**: Automatically extracts links and associated text from any website
+- **🧠 Semantic Understanding**: Uses sentence transformers to understand query meaning beyond keyword matching
+- **⚡ Fast Vector Search**: ChromaDB-powered similarity search for instant results
+- **💾 Intelligent Caching**: Daily caching system to avoid redundant scraping
+- **🤖 Interactive Chatbot**: Conversational interface for natural query interaction
+- **🎯 Precise Recommendations**: Returns the most relevant link based on semantic similarity
 
-### **1. Scraping Website Data**
-A `daily_scraper` function is used to scrape text and links from a specified website. This function is imported from the `WebChatbot.daily_scrapping` module.
+## 🏗️ Architecture
 
-### **2. Initializing ChromaDB Client and Embedding Function**
-- **ChromaDB is used to store the embeddings of the scraped data.**
-- **Sentence-Transformer model (`paraphrase-MiniLM-L6-v2`) generates embeddings for text and user queries.**
+The system follows a multi-stage pipeline:
 
-### **3. Storing Data in ChromaDB**
-- A ChromaDB collection named `links` is created to store the scraped data.
-- Each text and its corresponding link is embedded and stored with a unique ID.
+1. **Data Ingestion**: Web scraper extracts links and text content
+2. **Text Processing**: Content is cleaned and normalized
+3. **Embedding Generation**: Sentence transformers create vector representations
+4. **Vector Storage**: ChromaDB stores embeddings for fast retrieval
+5. **Query Processing**: User queries are embedded and matched against stored vectors
+6. **Result Ranking**: Most semantically similar content is returned
 
-### **4. Query Matching**
-- User queries are embedded using the same Sentence-Transformer model.
-- The embedded query is matched against the stored embeddings in ChromaDB.
-- The most relevant link is returned to the user.
+## 🚀 Quick Start
 
-## **How It Works**
-1. The user specifies a website link, and the `daily_scraper` function scrapes the data.
-2. The scraped text and links are embedded and stored in ChromaDB.
-3. The user enters a query through the chatbot interface.
-4. The chatbot uses the embedded query to find the most relevant link from the vector database.
+### Prerequisites
 
-## **Requirements**
-- **Python**
-- **ChromaDB**
-- **Sentence-Transformers**
-- **tqdm**
+```bash
+pip install chromadb sentence-transformers requests beautifulsoup4 tqdm
+```
 
-## **Usage**
-1. Run the script.
-2. Input the website link to scrape.
-3. After the data is processed, interact with the chatbot to find relevant links based on your queries.
-4. Type `exit` to stop the chatbot.
+### Installation
 
-## **Benefits**
-- **Saves users time by providing the exact link they want without manually searching the website.**
-- **Offers a seamless and efficient way to find specific information.**
+1. **Clone the repository**
+```bash
+git clone https://github.com/Mehedi-Bin-Hafiz/AI-Powered-Website-Guide-Recommender.git
+cd AI-Powered-Website-Guide-Recommender
+```
 
-## **Future Enhancements**
-- **Add support for multilingual queries.**
-- **Incorporate more advanced embedding models for better relevance matching.**
-- **Implement a web-based interface for improved user experience.**
+2. **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
 
-## **License**
-[Insert License Details Here]
+3. **Run the chatbot**
+```bash
+python chatbot.py
+```
 
-## **Contribution**
-Feel free to fork the repository, submit issues, or create pull requests for improvements.
+### Usage Example
+
+```bash
+# Start the application
+python chatbot.py
+
+# Enter website URL when prompted
+Give me website link: https://example-university.edu
+
+# Wait for data processing
+Learning the data...
+Learning complete! Ask me anything or type "exit" to stop:
+
+# Ask natural language questions
+Enter your query: admission requirements
+The best matching link for your query is: https://example-university.edu/admissions/requirements
+
+Enter your query: computer science courses
+The best matching link for your query is: https://example-university.edu/academics/computer-science
+
+Enter your query: exit
+Exiting the chatbot...
+```
+
+## 📁 Project Structure
+
+```
+AI-Powered-Website-Guide-Recommender/
+├── chatbot.py                 # Main chatbot application
+├── WebChatbot/
+│   └── daily_scrapping.py    # Web scraping module
+├── docs/
+│   └── architecture.png      # System architecture diagram
+├── requirements.txt          # Python dependencies
+├── README.md                # Project documentation
+└── LICENSE                  # MIT License
+```
+
+## 🔧 Technical Details
+
+### Core Components
+
+#### 1. Web Scraper (`daily_scrapping.py`)
+- **BeautifulSoup4** for HTML parsing
+- **Requests** for HTTP operations
+- **Smart caching** to avoid daily re-scraping
+- **Text cleaning** and normalization
+- **URL resolution** for relative links
+
+#### 2. Vector Database (`chatbot.py`)
+- **ChromaDB** for embedding storage and retrieval
+- **Sentence Transformers** (`paraphrase-MiniLM-L6-v2`) for embeddings
+- **Semantic search** using cosine similarity
+- **Real-time query processing**
+
+### Key Functions
+
+```python
+# Scraping function with caching
+def daily_scraper(url)
+    # Returns cached data if scraped today, else scrapes fresh
+
+# Query processing function  
+def find_best_link(query)
+    # Embeds query and finds most similar content
+```
+
+## 🛠️ Configuration
+
+### Embedding Model
+The system uses `paraphrase-MiniLM-L6-v2` by default. You can modify this in `chatbot.py`:
+
+```python
+embedding_function = SentenceTransformerEmbeddingFunction(
+    model_name="your-preferred-model"
+)
+```
+
+### Search Results
+Currently returns top 1 result. Modify `n_results` parameter for multiple results:
+
+```python
+results = collection.query(query_embeddings=query_embedding, n_results=5)
+```
+
+## 📊 Performance Considerations
+
+- **Caching**: Daily cache reduces scraping overhead
+- **Embedding Model**: Lightweight model balances speed and accuracy
+- **Vector Database**: ChromaDB provides fast similarity search
+- **Memory Usage**: Scales with website size and content volume
+
+## 🔮 Future Enhancements
+
+- [ ] **Multi-language Support**: Handle queries in different languages
+- [ ] **Advanced Models**: Integration with larger transformer models
+- [ ] **Web Interface**: Flask/Django web application
+- [ ] **Result Ranking**: Multiple relevance factors beyond similarity
+- [ ] **Content Filtering**: Ignore navigation/footer links
+- [ ] **Batch Processing**: Handle multiple websites simultaneously
+- [ ] **API Endpoints**: RESTful API for integration
+- [ ] **Analytics Dashboard**: Query patterns and performance metrics
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Setup
+
+```bash
+# Clone your fork
+git clone https://github.com/YOUR-USERNAME/AI-Powered-Website-Guide-Recommender.git
+cd AI-Powered-Website-Guide-Recommender
+
+# Install development dependencies
+pip install -r requirements-dev.txt
+
+# Run tests
+python -m pytest tests/
+```
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Mehedi Bin Hafiz**
+- GitHub: [@Mehedi-Bin-Hafiz](https://github.com/Mehedi-Bin-Hafiz)
+
+## 🙏 Acknowledgments
+
+- **Sentence Transformers** team for the embedding models
+- **ChromaDB** for the vector database solution
+- **BeautifulSoup** for web scraping capabilities
+
+## 📈 Use Cases
+
+- **Educational Websites**: Quickly find course information, requirements, faculty details
+- **E-commerce Sites**: Locate specific products or categories
+- **Documentation Sites**: Find relevant API endpoints or guides
+- **News Websites**: Discover articles on specific topics
+- **Corporate Websites**: Navigate to specific departments or services
+
+## 🐛 Issues and Support
+
+If you encounter any issues or have questions:
+
+1. Check existing [Issues](https://github.com/Mehedi-Bin-Hafiz/AI-Powered-Website-Guide-Recommender/issues)
+2. Create a new issue with detailed description
+3. Include error messages and steps to reproduce
+
+---
+
+<p align="center">
+  Made with ❤️ by Mehedi Bin Hafiz
+</p>
